@@ -19,23 +19,63 @@
 <body>
 
 	
-<header>
-	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
-	<nav>
-		<ul>
-			<li>projets</li>
-			<li>contact</li>
-			<a id="loginLogoutLink" href="#" class="loggedIn">login</a>
-			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li> </ul>
-	</nav>
-</header>
-<main>
-	<aside id="modall" class="modal" aria-hidden="True" role="dialog"  aria-labelledby="title" style="display:none"></aside>
-	<div class="modal-wrapper"></div>
-	<h1 id="title">ffff</h1>
-	<p>ddd</p>
-</aside>
+	<header>
+		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+		<nav>
+			<ul>
+				<li>projets</li>
+				<li>contact</li>
+				<li><a id="loginLogoutLink" href="#" class="loggedIn">login</a></li>
+				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+			</ul>
+		</nav>
+	</header>
+	
 
+<div id="modall" class="modal dnone" aria-hidden="true" role="dialog" aria-labelledby="title">
+    <div class="modal-wrapper">
+        <a href="" class="close">
+            <i class="fa-solid fa-xmark"></i>
+        </a>
+        <h2>Galerie photo</h2>
+        <div id="gallery-modal">
+       
+        </div>
+        <a href="#modalAjoutPhoto" class="js-modal project" id="ajouterProjetLink">Ajouter une photo</a>
+    </div>
+</div>
+
+<div id="modalAjoutPhoto" class="modal dnone" aria-hidden="true" role="dialog">
+    <div class="modal-wrapper">
+       
+        <a href="#" class="back" id="retourGalerie">
+            <i class="fa-solid fa-arrow-left"></i> 
+        </a>
+        <a href="#" class="close" id="ferme">
+            <i class="fa-solid fa-xmark"></i>
+        </a>
+        <h2>Ajouter une photo</h2>
+        <form id="formAjoutPhoto">
+            <label for="image">Image :</label>
+            <input type="file" id="pictureProjet" name="image" accept="image/*" required>
+            <label for="titrePhoto">Titre :</label>  
+            <input type="text" id="titrePhoto" name="titrePhoto" required>
+            <label for="categoriePhoto">Catégorie :</label>
+            <select id="categoriePhoto" name="categoriePhoto" required>
+                <option value="1">Objets</option>
+                <option value="2">Appartements</option>
+                <option value="3">Hôtels & restaurants</option>
+            </select>
+            <input id="butAdd" type="submit" value="Ajouter" disabled>
+        </form>
+    </div>
+</div>
+
+
+<main>
+
+
+	
 
 	<section id="introduction">
 		<figure>
@@ -53,24 +93,24 @@
 			<h2>Mes Projets</h2>
 			<div class="bas" id="modifierButton2">
 				<i class="fa-regular fa-pen-to-square" id="modifierButton"></i>
-				<a href="#modall" class="js-modal" id="modifierProjetLink">Modifier le projet</a>
-		
-			</div>
+				<a href="#modall" class="js-modal" id="modifierProjetLink">Modifier</a>
 			</div>
 		</div>
 		
-		
-		
-		<div class="filters">
-			<button class="filter-button" data-filter="all">Tous</button>
-			<button class="filter-button" data-filter="Objets">Objets</button>
-			<button class="filter-button" data-filter="Appartements">Appartements</button>
-			<button class="filter-button" data-filter="Hotels & restaurants">Hôtels & restaurants</button>
 		</div>
 		
-		<div class="gallery" id="gallery">
 		
+		
+		<div class="centre">
+			<button class="button" data-filter="all">Tous</button>
+			<button class="button" data-filter="Objets">Objets</button>
+			<button class="button" data-filter="Appartements">Appartements</button>
+			<button class="button" data-filter="Hotels & restaurants">Hôtels & restaurants</button>
 		</div>
+		<div class="gallery-container" >
+			<div class="gallery" id="gallery">
+		
+		</div></div>
 	</section>
 	
 	  

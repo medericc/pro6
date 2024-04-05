@@ -3,11 +3,9 @@ async function fetchProjets() {
     const response = await fetch('http://localhost:5678/api/works');
     const data = await response.json();
 
-    const projets = Array.isArray(data) ? data : [];
+   
 
-    console.log('Projets récupérés:', projets); 
-
-    return projets;
+    return data;
   } catch (error) {
     console.error('Erreur de récupération des données des travaux:', error);
     throw error; 
@@ -17,34 +15,32 @@ async function fetchProjets() {
 async function fetchCategories() {
   try {
     const categoriesResponse = await fetch('http://localhost:5678/api/categories');
-    console.log('Réponse brute de l\'API pour les catégories:', categoriesResponse);
-
     const categoriesData = await categoriesResponse.json();
-    console.log('Réponse de l\'API pour les catégories:', categoriesData);
 
-    const categoryIds = categoriesData.map(category => category.id);
-    console.log('Identifiants des catégories:', categoryIds);
+  
+    const categoryNames = categoriesData.map(category => category.name);
 
-    return categoryIds;
+ 
+    return categoryNames;
   } catch (error) {
     console.error('Erreur de récupération des catégories:', error);
     throw error;
   }
 }
+
 async function updateGallery(filter = 'all') {
   try {
     const projets = await fetchProjets();
     const categories = await fetchCategories();
 
-    console.log('Projets récupérés:', projets);
-    console.log('Réponse de l\'API pour les catégories:', categories);
+    
 
     const galerie = document.getElementById('gallery');
     galerie.innerHTML = '';
 
     if (projets && projets.length > 0) {
       projets
-        .filter(projet => (filter === 'all' ? true : projet.categoryId == filter))
+        .filter(projet => (filter === 'all' ? true : projet.category === filter))
         .forEach(projet => {
           const figure = document.createElement('figure');
 
@@ -63,14 +59,14 @@ async function updateGallery(filter = 'all') {
       console.warn('Aucun projet trouvé.');
     }
 
-    const menu = document.querySelector('.filters');
+    const menu = document.querySelector('.centre');
     menu.innerHTML = '';
 
     if (categories && Array.isArray(categories) && categories.length > 0) {
       const tousLesTravauxOption = document.createElement('button');
-      tousLesTravauxOption.classList.add('filter-button');
+      tousLesTravauxOption.classList.add('button');
       tousLesTravauxOption.dataset.filter = 'all';
-      tousLesTravauxOption.textContent = 'Tous les travaux';
+      tousLesTravauxOption.textContent = 'Tous';
       menu.appendChild(tousLesTravauxOption);
 
       tousLesTravauxOption.addEventListener('click', () => {
@@ -79,7 +75,7 @@ async function updateGallery(filter = 'all') {
 
       categories.forEach(categorie => {
         const option = document.createElement('button');
-        option.classList.add('filter-button');
+        option.classList.add('button');
         option.dataset.filter = categorie;
         option.textContent = categorie;
         menu.appendChild(option);
@@ -99,53 +95,59 @@ async function updateGallery(filter = 'all') {
 }
 
 
-function enableBlackBar() {
-  const isUserLoggedIn = sessionStorage.getItem('token') !== null;
 
-  const loginLogoutLink = document.getElementById('loginLogoutLink');
-  const modifierButton2 = document.getElementById('modifierButton2');
 
-  if (loginLogoutLink) {
-    if (isUserLoggedIn) {
-      loginLogoutLink.textContent = 'logout';
-      loginLogoutLink.addEventListener('click', logout);
-    } else {
-      loginLogoutLink.textContent = 'login';
-      loginLogoutLink.removeEventListener('click', logout);
+async function enableBlackBar() {
+  try {
+    const isUserLoggedIn = sessionStorage.getItem('token') !== null;
+
+    const loginLogoutLink = document.getElementById('loginLogoutLink');
+    const modifierButton2 = document.getElementById('modifierButton2');
+
+    if (loginLogoutLink) {
+      if (isUserLoggedIn) {
+        loginLogoutLink.textContent = 'logout';
+        loginLogoutLink.addEventListener('click', logout);
+      } else {
+        loginLogoutLink.textContent = 'login';
+        loginLogoutLink.removeEventListener('click', logout);
+      }
     }
-  }
 
-  if (isUserLoggedIn) {
-    const blackBar = document.createElement('div');
-    blackBar.classList.add('black-bar');
-    blackBar.innerHTML = '<p>Mode Édition <i class="fa-regular fa-pen-to-square"></i></p>';
-    document.body.insertBefore(blackBar, document.body.firstChild);
+    if (isUserLoggedIn) {
+      const blackBar = document.createElement('div');
+      blackBar.classList.add('black-bar');
+      blackBar.innerHTML = '<p><i class="fa-regular fa-pen-to-square"></i>Mode Édition </p>';
+      document.body.insertBefore(blackBar, document.body.firstChild);
 
-    const filterButtons = document.querySelectorAll('.filter-button');
-    filterButtons.forEach(button => {
-      button.style.display = 'none';
-    });
+      const filterButtons = document.querySelectorAll('.button');
+      filterButtons.forEach(button => {
+        button.style.display = 'none';
+      });
+
+      if (modifierButton2) {
+        modifierButton2.style.display = 'block';
+      }
+    }
 
     if (modifierButton2) {
-      modifierButton2.style.display = 'block';
+      modifierButton2.style.display = isUserLoggedIn ? 'block' : 'none';
     }
-  }
-
-  if (modifierButton2) {
-    modifierButton2.style.display = isUserLoggedIn ? 'block' : 'none';
+  } catch (error) {
+    console.error('Erreur lors de l\'activation de la barre noire:', error);
   }
 }
 
-
 function logout() {
   sessionStorage.removeItem('token');
-  window.location.reload(); // Recharge la page pour mettre à jour l'état de connexion
+  window.location.reload(); 
 }
 
 document.addEventListener("DOMContentLoaded", async function () {
   try {
     await updateGallery();
+    await enableBlackBar();
   } catch (error) {
-    console.error('Erreur lors de l\'initialisation de la galerie:', error);
+    console.error('Erreur lors de l\'initialisation de la galerie ou de la barre noire:', error);
   }
 });

@@ -1,51 +1,50 @@
-//requete de co
+// se co
 async function login(user) {
   try {
-    const response = await fetch('http://localhost:5678/api/users/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      },
-      body: JSON.stringify(user)
-    });
+      const response = await fetch('http://localhost:5678/api/users/login', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+          },
+          body: JSON.stringify(user)
+      });
 
-    if (!response.ok) {
-      // error here
-      const errorText = await response.text();
-      throw new Error(`Erreur de connexion: ${errorText}`);
-    }
+      if (!response.ok) {
+          const errorText = await response.text();
+          throw new Error(`Erreur de connexion: pseudo ou mot de passe invalide`);
+      }
 
-    const data = await response.json();
+      const data = await response.json();
 
-    // token dans sessionstorage
-    sessionStorage.setItem('token', data.token);
+      // get token and record
+      sessionStorage.setItem('token', data.token);
 
-    // redirection
-    window.location.href = 'index.html';
+      // ggo home
+      window.location.href = 'index.html';
   } catch (error) {
-    // error
-    const errorDiv = document.querySelector('.alredyLogged__error');
-    errorDiv.textContent = error.message;
+      const errorDiv = document.querySelector('.alredyLogged__error');
+      errorDiv.textContent = error.message;
   }
 }
 
-// co
 document.addEventListener("DOMContentLoaded", function () {
-  const submit = document.getElementById('submit');
+  const coSubmit = document.getElementById('login__form');
 
-  submit.addEventListener("click", () => {
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
+  coSubmit.addEventListener("submit", (event) => {
+      event.preventDefault(); // pas recharger
 
-    const user = {
-      email: email,
-      password: password
-    };
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
 
-    // se co
-    login(user);
+      const user = {
+          email: email,
+          password: password
+      };
+
+      login(user);
   });
 });
+
 
 // deco
 function logout() {
@@ -82,13 +81,12 @@ function toggleLoginLogout() {
 }
 
 
-// appeller au debut du charegemtnd ud dom
+// appeller au debut du chargement du DOM
 document.addEventListener("DOMContentLoaded", function () {
   toggleLoginLogout();
 });
 
-// basulement
+// basculement
 document.addEventListener("login", function () {
   toggleLoginLogout();
 });
-
