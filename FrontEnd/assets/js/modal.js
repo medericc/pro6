@@ -103,13 +103,10 @@ async function populateModalWithData(data) {
         img.alt = data[i].title;
         div.appendChild(img);
 
-        const p = document.createElement("p");
-        div.appendChild(p);
+      
 
-        const icon = document.createElement("i");
-        p.appendChild(icon);
 
-        const deleteButton = document.createElement("button");
+        const deleteButton = document.createElement("div");
         deleteButton.innerHTML = '<i class="fa fa-trash" aria-hidden="true"></i>';
         deleteButton.addEventListener("click", async (event) => {
             event.stopPropagation(); 

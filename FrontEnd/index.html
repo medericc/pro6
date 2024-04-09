@@ -37,10 +37,11 @@
         <a href="" class="close">
             <i class="fa-solid fa-xmark"></i>
         </a>
-        <h2>Galerie photo</h2>
+        <h2 class="blac">Galerie photo</h2>
         <div id="gallery-modal">
        
         </div>
+		<hr>
         <a href="#modalAjoutPhoto" class="js-modal project" id="ajouterProjetLink">Ajouter une photo</a>
     </div>
 </div>
@@ -54,19 +55,24 @@
         <a href="#" class="close" id="ferme">
             <i class="fa-solid fa-xmark"></i>
         </a>
-        <h2>Ajouter une photo</h2>
+        <h2 class="blac">Ajout photo</h2>
         <form id="formAjoutPhoto">
+<div class="formCol" >
             <label for="image">Image :</label>
             <input type="file" id="pictureProjet" name="image" accept="image/*" required>
-            <label for="titrePhoto">Titre :</label>  
-            <input type="text" id="titrePhoto" name="titrePhoto" required>
-            <label for="categoriePhoto">Catégorie :</label>
-            <select id="categoriePhoto" name="categoriePhoto" required>
+           
+			<label  for="titrePhoto">Titre :</label>  
+            <input class="rect"  type="text" id="titrePhoto" name="titrePhoto" required>
+           
+			<label  for="categoriePhoto">Catégorie :</label>
+            <select class="rect" id="categoriePhoto" name="categoriePhoto" required>
                 <option value="1">Objets</option>
                 <option value="2">Appartements</option>
                 <option value="3">Hôtels & restaurants</option>
             </select>
-            <input id="butAdd" type="submit" value="Ajouter" disabled>
+		</div>
+		<hr>
+            <input id="butAdd" type="submit" value="Valider" disabled>
         </form>
     </div>
 </div>

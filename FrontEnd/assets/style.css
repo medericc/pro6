@@ -135,20 +135,20 @@ nav li {
 }
 
 nav li a {
-    color: inherit; /* Utilise la couleur héritée */
-    text-decoration: none; /* Supprime la soulignement par défaut */
+    color: inherit; 
+    text-decoration: none; 
 }
 
 nav li a:hover {
-    color: #B1663C; /* Couleur au survol */
+    color: #B1663C; 
 }
 
 #modifierButton2 a {
 	width: 58px;
 	height:16px;
 	margin-left: 0;
-			color: inherit; /* Utilise la couleur héritée */
-		text-decoration: none; /* Supprime la soulignement par défaut */
+			color: inherit; 
+		text-decoration: none; 
 	
 }
 
@@ -157,13 +157,31 @@ nav li a:hover {
 	height: 15px;
 	margin-left: 0;
 }
+.modal-wrapper h2 {
+	margin: 50px 100px 45px 190px;
+}
 
+.modal-wrapper  {
+	margin: 0;
+}
 #modifierButton2 {
 	width: 84px;
 
 	
 }
+.blac {
+	color:black;
+}
+.rect
+{
+width:420px;
+height:51px;
+}
+.formCol {
 
+	display: flex;
+    flex-direction: column;
+}
 li:hover {
 	color: #B1663C;
 }
@@ -303,6 +321,21 @@ input[type="submit"]{
 .reset-password {
 	text-align:center;
 	color:black;
+}
+
+
+
+
+#ajouterProjetLink {
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin : 2em auto ;
+	width: 237px;
+	height: 36px;
+	text-align: center;
+	border-radius: 60px ;
 }
 
 footer nav ul {
