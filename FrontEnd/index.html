@@ -60,6 +60,7 @@
 <div class="formCol" >
             <label for="image">Image :</label>
             <input type="file" id="pictureProjet" name="image" accept="image/*" required>
+			<img id="output" src="#" alt="Aperçu de l'image" style="max-width: 100%; max-height: 300px;">
            
 			<label  for="titrePhoto">Titre :</label>  
             <input class="rect"  type="text" id="titrePhoto" name="titrePhoto" required>
@@ -72,8 +73,10 @@
             </select>
 		</div>
 		<hr>
-            <input id="butAdd" type="submit" value="Valider" disabled>
+            <input class="bac"id="butAdd" type="submit" value="Valider" disabled>
         </form>
+		
+ 
     </div>
 </div>
 
@@ -99,7 +102,7 @@
 			<h2>Mes Projets</h2>
 			<div class="bas" id="modifierButton2">
 				<i class="fa-regular fa-pen-to-square" id="modifierButton"></i>
-				<a href="#modall" class="js-modal" id="modifierProjetLink">Modifier</a>
+				<a href="#modall" class="js-modal" id="modifierProjetLink">modifier</a>
 			</div>
 		</div>
 		

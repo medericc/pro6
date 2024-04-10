@@ -102,12 +102,14 @@ async function populateModalWithData(data) {
         img.src = data[i].imageUrl;
         img.alt = data[i].title;
         div.appendChild(img);
+        div.classList.add("imageGallery");
 
       
 
 
         const deleteButton = document.createElement("div");
         deleteButton.innerHTML = '<i class="fa fa-trash" aria-hidden="true"></i>';
+        deleteButton.classList.add("deleteButton");
         deleteButton.addEventListener("click", async (event) => {
             event.stopPropagation(); 
 
@@ -174,7 +176,18 @@ window.addEventListener('keydown', function (e) {
         closeModal(e);
     }
 });
+// Définition de la fonction loadFile
+const loadFile = function(event) {
+    var output = document.getElementById('output');
+    output.src = URL.createObjectURL(event.target.files[0]);
+    output.onload = function() {
+        URL.revokeObjectURL(output.src); // libérer la mémoire
+    };
+};
 
+// Associer la fonction loadFile à l'événement onchange de l'input de type file
+const fileInput = document.getElementById('pictureProjet');
+fileInput.addEventListener('change', loadFile);
 
 async function modalAjoutPhoto() {
     aside.classList.add("dnone");
@@ -185,6 +198,22 @@ async function modalAjoutPhoto() {
 
     const backButton = modalAjout.querySelector('#retourGalerie');
     
+
+   // Ajouter la fonction loadFile pour afficher l'image
+   const loadFile = function(event) {
+    var output = document.getElementById('output');
+    output.src = URL.createObjectURL(event.target.files[0]);
+    output.onload = function() {
+        URL.revokeObjectURL(output.src); // free memory
+    };
+};
+
+// Associer la fonction loadFile à l'événement onchange de l'input de type file
+const fileInput = document.getElementById('pictureProjet');
+fileInput.addEventListener('change', loadFile);
+
+
+
     
     backButton.addEventListener('click', function() {
         event.preventDefault();
