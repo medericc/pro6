@@ -43,7 +43,7 @@ async function updateGallery(filter = 'all') {
         .filter(projet => (filter === 'all' ? true : projet.category === filter))
         .forEach(projet => {
           const figure = document.createElement('figure');
-
+          figure.id = "figure" + projet.id ;
           const image = document.createElement('img');
           image.src = projet.imageUrl;
           image.alt = projet.title;

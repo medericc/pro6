@@ -42,6 +42,7 @@ article {
 }
 #modall {
 	position:absolute;
+	border-radius: 10px;
 	width: 630px;
 	height: 688px;
 	background-color: red;
@@ -57,7 +58,7 @@ article {
 .deleteButton{
 	position: absolute;
 	top:5px;
-	right:5px;
+	left: 35px;
 	margin:0;
 	z-index: 1;
 }
@@ -70,6 +71,7 @@ hr {
 
 #modalAjoutPhoto {
 	position:absolute;
+	border-radius: 10px;
 	width: 630px;
 	height: 688px;
 	background-color: red;
@@ -245,11 +247,16 @@ main {
 	height: 17px;
 
 }
-
+#modifierProjetLink {
+	margin:0;
+}
+.back {
+	margin-top: 10px;
+}
 .modal-wrapper i {
-	position: absolute;
-	width:17px;
-	height: 17px;
+	
+	width:600px;
+	height: 24px;
 	top: 5vh;
 	left:28vh;
 
@@ -292,6 +299,7 @@ margin: auto;
 
 }
 .close {
+	width: 24px;
 	position: absolute;
     top: 10px; 
     right: 10px; 

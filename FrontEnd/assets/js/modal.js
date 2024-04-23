@@ -94,6 +94,7 @@ function closeModal() {
 // create modal gallery project
 const modaleSectionProjets = document.querySelector('#gallery-modal');
 async function populateModalWithData(data) {
+    modaleSectionProjets.innerHTML='';
     for (let i = 0; i < data.length; i++) {
         const div = document.createElement("div");
         modaleSectionProjets.appendChild(div);
@@ -128,12 +129,14 @@ async function populateModalWithData(data) {
                         'Authorization': `Bearer ${token}`
                     }
                 });
+               
                 if (!response.ok) {
                     throw new Error("La suppression du travail a échoué.");
                 }
 
                 
                 div.remove();
+                document.getElementById('figure' + data[i].id).remove();
             } catch (error) {
                 console.error("Erreur lors de la suppression du travail :", error);
             } finally {
@@ -291,7 +294,7 @@ fileInput.addEventListener('change', loadFile);
       
                 galerie.appendChild(figure);
                 this.reset();
-
+                document.getElementById('titrePhoto').value = '';
                 //edit
                 await updateGallery();
                 await modalGal();
