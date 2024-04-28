@@ -45,7 +45,7 @@ article {
 	border-radius: 10px;
 	width: 630px;
 	height: 688px;
-	background-color: red;
+	background-color: #FFFFFF;
 	z-index:2;
 	top: 50vh;
 	left: 50vw;
@@ -55,13 +55,7 @@ article {
 .imageGallery{
 	position: relative;
 }
-.deleteButton{
-	position: absolute;
-	top:5px;
-	left: 35px;
-	margin:0;
-	z-index: 1;
-}
+
 
 
 hr {
@@ -74,7 +68,7 @@ hr {
 	border-radius: 10px;
 	width: 630px;
 	height: 688px;
-	background-color: red;
+	background-color: #FFFFFF;
 	z-index:3;
 	top: 50vh;
 	left: 50vw;
@@ -94,6 +88,20 @@ blockquote:before, blockquote:after,
 q:before, q:after {
 	content: '';
 	content: none;
+}
+.deleteButton i {
+	
+	color:white;
+}
+.deleteButton{
+	position: absolute;
+	background-color: black;
+	width: 17px;
+	height: 17px;
+	top:5px;
+	left: 35px;
+	margin:0;
+	z-index: 1;
 }
 table {
 	border-collapse: collapse;
@@ -169,7 +177,7 @@ nav li a:hover {
 	margin-left: 0;
 }
 .modal-wrapper h2 {
-	margin: 50px 100px 45px 190px;
+	margin: 50px 100px 50px 100px;
 }
 
 .modal-wrapper  {
@@ -190,6 +198,7 @@ nav li a:hover {
 .rect
 {
 width:420px;
+box-shadow: 0px 4px 14px 0px #00000017;
 height:51px;
 }
 .formCol {
@@ -249,6 +258,10 @@ main {
 }
 #modifierProjetLink {
 	margin:0;
+	color: black;
+	height: 18px;
+	width:84px;
+	text-decoration: none;
 }
 .back {
 	margin-top: 10px;
