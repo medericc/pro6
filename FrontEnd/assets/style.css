@@ -62,9 +62,12 @@ hr {
 	width:420px;
 	
 }
+
 .bac {
 	display: flex;
 	justify-content: center;
+	height: 36px;
+	width: 237px;
 }
 
 
@@ -205,12 +208,20 @@ nav li a:hover {
 }
 .blac {
 	color:black;
+	height: 30px;
+	width: 173px;
 }
 .rect
 {
 width:420px;
+border:0;
 box-shadow: 0px 4px 14px 0px #00000017;
 height:51px;
+}
+
+.titrec  {
+	margin:35px 0px 10px 0px;
+	font-family: 'Work Sans';
 }
 .formCol {
 
@@ -376,7 +387,7 @@ input[type="submit"]{
 }
 
 #hr2  {
-	margin: 17vh 0vh 0vh 2vh;
+	margin: 5vh 0vh 0vh 2vh;
 }
 
 
