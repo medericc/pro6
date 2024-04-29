@@ -62,6 +62,13 @@ hr {
 	width:420px;
 	
 }
+.bac {
+	display: flex;
+	justify-content: center;
+}
+
+
+
 
 #modalAjoutPhoto {
 	position:absolute;
@@ -92,14 +99,18 @@ q:before, q:after {
 .deleteButton i {
 	
 	color:white;
+	z-index:2;
+	margin:4px 0px 0px 4.5px;
+	width: 17px;
+	height: 17px;
 }
 .deleteButton{
 	position: absolute;
 	background-color: black;
-	width: 17px;
-	height: 17px;
+	width: 22px;
+	height: 22px;
 	top:5px;
-	left: 35px;
+	left: 50px;
 	margin:0;
 	z-index: 1;
 }
