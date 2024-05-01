@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", (event) => {
     
-  
+
 const aside = document.querySelector('#modall');
 const modalAjout = document.getElementById('modalAjoutPhoto');
 const closeButton = document.querySelector('.close');
@@ -8,12 +8,12 @@ const ferme = document.getElementById('ferme');
 let modalShouldClose = true;
 modalGal();
 
-
+//fermer modale
 ferme.addEventListener('click', function () {
     closeModal()
 });
 
-
+//show button
 const modifier = document.getElementById('modifierProjetLink');
 modifier.addEventListener('click', function () {
     aside.classList.remove("dnone");

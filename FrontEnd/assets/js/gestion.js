@@ -18,10 +18,10 @@ async function fetchCategories() {
     const categoriesData = await categoriesResponse.json();
 
   
-    const categoryNames = categoriesData.map(category => category.name);
+    //const categoryNames = categoriesData.map(category => category.name);
 
  
-    return categoryNames;
+    return categoriesData;
   } catch (error) {
     console.error('Erreur de récupération des catégories:', error);
     throw error;
@@ -74,10 +74,11 @@ async function updateGallery(filter = 'all') {
       });
 
       categories.forEach(categorie => {
+        
         const option = document.createElement('button');
         option.classList.add('button');
-        option.dataset.filter = categorie;
-        option.textContent = categorie;
+        option.dataset.filter = categorie.id;
+        option.textContent = categorie.name;
         menu.appendChild(option);
 
         option.addEventListener('click', () => {

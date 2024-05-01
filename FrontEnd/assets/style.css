@@ -54,6 +54,7 @@ article {
 }
 .imageGallery{
 	position: relative;
+	margin: 0;
 }
 
 
@@ -191,7 +192,12 @@ nav li a:hover {
 	margin-left: 0;
 }
 .modal-wrapper h2 {
-	margin: 50px 100px 50px 100px;
+	margin: 80px 0px 40px 0px;
+	font-family: 'Work Sans';
+	font-weight: 400;
+    width: 630px;
+    white-space: nowrap;
+    text-align: center;
 }
 
 .modal-wrapper  {
@@ -210,6 +216,10 @@ nav li a:hover {
 	color:black;
 	height: 30px;
 	width: 173px;
+}
+#cross {
+	width: 24px;
+	height: 24px;
 }
 .rect
 {
@@ -286,7 +296,8 @@ main {
 	text-decoration: none;
 }
 .back {
-	margin-top: 10px;
+	margin-top: 35px;
+    margin-left: 50px;
 }
 .modal-wrapper i {
 	
@@ -295,6 +306,9 @@ main {
 	top: 5vh;
 	left:28vh;
 
+}
+#tpho {
+	margin: 10px 0px 40px 0px;
 }
 
 .gallery img,figure {
@@ -333,12 +347,17 @@ margin: auto;
 	text-align: center;
 
 }
+.fa-xmark {
+	width: 24px;
+	height: 24px;
+}
 .close {
 	width: 24px;
-	position: absolute;
-    top: 10px; 
-    right: 10px; 
+    position: absolute;
+    top: 32px;
+    right: 25px;
 }
+
 #contact h2{
 	margin-bottom: 20px;
 }
