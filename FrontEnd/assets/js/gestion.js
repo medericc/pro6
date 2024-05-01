@@ -3,8 +3,6 @@ async function fetchProjets() {
     const response = await fetch('http://localhost:5678/api/works');
     const data = await response.json();
 
-   
-
     return data;
   } catch (error) {
     console.error('Erreur de récupération des données des travaux:', error);
@@ -17,10 +15,6 @@ async function fetchCategories() {
     const categoriesResponse = await fetch('http://localhost:5678/api/categories');
     const categoriesData = await categoriesResponse.json();
 
-  
-    //const categoryNames = categoriesData.map(category => category.name);
-
- 
     return categoriesData;
   } catch (error) {
     console.error('Erreur de récupération des catégories:', error);
@@ -29,32 +23,37 @@ async function fetchCategories() {
 }
 
 async function updateGallery(filter = 'all') {
+  console.log(filter)
   try {
     const projets = await fetchProjets();
     const categories = await fetchCategories();
 
-    
-
     const galerie = document.getElementById('gallery');
     galerie.innerHTML = '';
-
+console.log(projets)
     if (projets && projets.length > 0) {
-      projets
-        .filter(projet => (filter === 'all' ? true : projet.category === filter))
-        .forEach(projet => {
-          const figure = document.createElement('figure');
-          figure.id = "figure" + projet.id ;
-          const image = document.createElement('img');
-          image.src = projet.imageUrl;
-          image.alt = projet.title;
-          figure.appendChild(image);
+      const filteredProjets = projets.filter(projet => {
+        if (filter === 'all') {
+          return true;
+        } else {
+          return projet.categoryId === parseInt(filter);
+        }
+      });
 
-          const figcaption = document.createElement('figcaption');
-          figcaption.textContent = projet.title;
-          figure.appendChild(figcaption);
+      filteredProjets.forEach(projet => {
+        const figure = document.createElement('figure');
+        figure.id = "figure" + projet.id;
+        const image = document.createElement('img');
+        image.src = projet.imageUrl;
+        image.alt = projet.title;
+        figure.appendChild(image);
+       
+        const figcaption = document.createElement('figcaption');
+        figcaption.textContent = projet.title;
+        figure.appendChild(figcaption);
 
-          galerie.appendChild(figure);
-        });
+        galerie.appendChild(figure);
+      });
     } else {
       console.warn('Aucun projet trouvé.');
     }
@@ -74,7 +73,6 @@ async function updateGallery(filter = 'all') {
       });
 
       categories.forEach(categorie => {
-        
         const option = document.createElement('button');
         option.classList.add('button');
         option.dataset.filter = categorie.id;
@@ -96,14 +94,19 @@ async function updateGallery(filter = 'all') {
 }
 
 
-
+const filterButtons = document.querySelectorAll('.button');
+filterButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    updateGallery(button.dataset.filter);
+  });
+});
 
 async function enableBlackBar() {
   try {
     const isUserLoggedIn = sessionStorage.getItem('token') !== null;
-
     const loginLogoutLink = document.getElementById('loginLogoutLink');
     const modifierButton2 = document.getElementById('modifierButton2');
+    const filterButtons = document.querySelectorAll('.button'); 
 
     if (loginLogoutLink) {
       if (isUserLoggedIn) {
@@ -121,10 +124,12 @@ async function enableBlackBar() {
       blackBar.innerHTML = '<p><i class="fa-regular fa-pen-to-square"></i>Mode Édition </p>';
       document.body.insertBefore(blackBar, document.body.firstChild);
 
-      const filterButtons = document.querySelectorAll('.button');
-      filterButtons.forEach(button => {
-        button.style.display = 'none';
-      });
+      
+      if (filterButtons && filterButtons.length > 0) {
+        filterButtons.forEach(button => {
+          button.style.display = 'none';
+        });
+      }
 
       if (modifierButton2) {
         modifierButton2.style.display = 'block';
@@ -138,6 +143,8 @@ async function enableBlackBar() {
     console.error('Erreur lors de l\'activation de la barre noire:', error);
   }
 }
+
+
 
 function logout() {
   sessionStorage.removeItem('token');
