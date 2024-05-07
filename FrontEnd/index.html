@@ -17,8 +17,6 @@
 </head>
 
 <body>
-
-	
 	<header>
 		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 		<nav>
@@ -30,130 +28,117 @@
 			</ul>
 		</nav>
 	</header>
-	
-
-<div id="modall" class="modal dnone" aria-hidden="true" role="dialog" aria-labelledby="title">
-    <div class="modal-wrapper">
-        <a href="" class="close">
-            <i class="fa-solid fa-xmark fa-xl" id="cross"></i>
-        </a>
-        <h2 class="blac">Galerie photo</h2>
-        <div id="gallery-modal">
-       
-        </div>
-		<hr id="hr">
-        <a href="#modalAjoutPhoto" class="js-modal project" id="ajouterProjetLink">Ajouter une photo</a>
-    </div>
-</div>
-
-<div id="modalAjoutPhoto" class="modal dnone" aria-hidden="true" role="dialog">
-    <div class="modal-wrapper">
-       
-        <a href="#" class="back" id="retourGalerie">
-            <i class="fa-solid fa-arrow-left fa-xl"></i> 
-        </a>
-        <a href="#" class="close" id="ferme">
-            <i class="fa-solid fa-xmark fa-xl"></i>
-        </a>
-        <h2 class="blac" id="tpho">Ajout photo</h2>
-        <form id="formAjoutPhoto">
-<div class="formCol" >
-           
-            <input type="file" id="pictureProjet" name="image" accept="image/*" required>
-			<img id="output" src="#" alt="Aperçu de l'image" style="max-width: 100%; max-height: 300px;">
-           
-			<label class="titrec" for="titrePhoto">Titre</label>  
-            <input class="rect"  type="text" id="titrePhoto" name="titrePhoto" required>
-           
-			<label class="titrec" for="categoriePhoto">Catégorie</label>
-            <select class="rect" id="categoriePhoto" name="categoriePhoto" required>
-                <option value="1">Objets</option>
-                <option value="2">Appartements</option>
-                <option value="3">Hôtels & restaurants</option>
-            </select>
-		</div>
-		<hr id="hr2">
-            <input class="bac"id="butAdd" type="submit" value="Valider" disabled>
-        </form>
-		
- 
-    </div>
-</div>
-
-
-<main>
-
-
-	
-
-	<section id="introduction">
-		<figure>
-			<img src="./assets/images/sophie-bluel.png" alt="">
-		</figure>
-		<article>
-			<h2>Designer d'espace</h2>
-			<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison finale du chantier.</p>
-			<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
-			<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
-		</article>
-	</section>
-	<section id="portfolio">
-		<div class="haut">
-			<h2>Mes Projets</h2>
-			<div class="bas" id="modifierButton2">
-				<i class="fa-regular fa-pen-to-square" id="modifierButton"></i>
-				<a href="#modall" class="js-modal" id="modifierProjetLink">modifier</a>
+	<div class="mod">
+		<div id="modall" class="modal dnone" aria-hidden="true" role="dialog" aria-labelledby="title">
+			<div class="modal-wrapper">
+				<a href="" class="close">
+					<i class="fa-solid fa-xmark fa-xl" id="cross"></i>
+				</a>
+				<h2 class="blac">Galerie photo</h2>
+				<div id="gallery-modal">
+				
+				</div>
+				<hr id="hr">
+				<a href="#modalAjoutPhoto" class="js-modal project" id="ajouterProjetLink">Ajouter une photo</a>
 			</div>
 		</div>
-		
+
+		<div id="modalAjoutPhoto" class="modal dnone" aria-hidden="true" role="dialog">
+			<div class="modal-wrapper">
+				<a href="#" class="back" id="retourGalerie">
+					<i class="fa-solid fa-arrow-left fa-xl"></i> 
+				</a>
+				<a href="#" class="close" id="ferme">
+					<i class="fa-solid fa-xmark fa-xl"></i>
+				</a>
+				<h2 class="blac" id="tpho">Ajout photo</h2>
+				<form id="formAjoutPhoto">
+					<div class="formCol" >
+					
+						<input type="file" id="pictureProjet" name="image" accept="image/*" required>
+						<img id="output" src="#" alt="Aperçu de l'image" style="max-width: 100%; max-height: 300px;">
+						
+						<label class="titrec" for="titrePhoto">Titre</label>  
+						<input class="rect"  type="text" id="titrePhoto" name="titrePhoto" required>
+						
+						<label class="titrec" for="categoriePhoto">Catégorie</label>
+						<select class="rect" id="categoriePhoto" name="categoriePhoto" required>
+							<option value="1">Objets</option>
+							<option value="2">Appartements</option>
+							<option value="3">Hôtels & restaurants</option>
+						</select>
+					</div>
+					<hr id="hr2">
+					<input class="bac"id="butAdd" type="submit" value="Valider" disabled>
+				</form>
+			</div>
 		</div>
-		
-		
-		
-		<div class="centre">
-			<button class="button" data-filter="all">Tous</button>
-			<button class="button" data-filter="Objets">Objets</button>
-			<button class="button" data-filter="Appartements">Appartements</button>
-			<button class="button" data-filter="Hotels & restaurants">Hôtels & restaurants</button>
-		</div>
-		<div class="gallery-container" >
-			<div class="gallery" id="gallery">
-		
-		</div></div>
-	</section>
+	</div>
+
+	<main>
+
+		<section id="introduction">
+			<figure>
+				<img src="./assets/images/sophie-bluel.png" alt="">
+			</figure>
+			<article>
+				<h2>Designer d'espace</h2>
+				<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison finale du chantier.</p>
+				<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
+				<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
+			</article>
+		</section>
+		<section id="portfolio">
+			<div class="haut">
+				<h2>Mes Projets</h2>
+				<div class="bas" id="modifierButton2">
+					<i class="fa-regular fa-pen-to-square" id="modifierButton"></i>
+					<a href="#modall" class="js-modal" id="modifierProjetLink">modifier</a>
+				</div>
+			</div>
+			
+			</div>
+			
+			
+			
+			<div class="centre">
+				<button class="button" data-filter="all">Tous</button>
+				<button class="button" data-filter="Objets">Objets</button>
+				<button class="button" data-filter="Appartements">Appartements</button>
+				<button class="button" data-filter="Hotels & restaurants">Hôtels & restaurants</button>
+			</div>
+			<div class="gallery-container" >
+				<div class="gallery" id="gallery">
+			
+			</div></div>
+		</section>
 	
-	  
+	
 
+		<section id="contact">
+			<h2>Contact</h2>
+			<p>Vous avez un projet ? Discutons-en !</p>
+			<form action="#" method="post">
+				<label for="name">Nom</label>
+				<input type="text" name="name" id="name">
+				<label for="email">Email</label>
+				<input type="email" name="email" id="email">
+				<label for="message">Message</label>
+				<textarea name="message" id="message" cols="30" rows="10"></textarea>
+				<input type="submit" value="Envoyer">
+			</form>
+		</section>
+	</main>
 
-
-
-
-
-
-	<section id="contact">
-		<h2>Contact</h2>
-		<p>Vous avez un projet ? Discutons-en !</p>
-		<form action="#" method="post">
-			<label for="name">Nom</label>
-			<input type="text" name="name" id="name">
-			<label for="email">Email</label>
-			<input type="email" name="email" id="email">
-			<label for="message">Message</label>
-			<textarea name="message" id="message" cols="30" rows="10"></textarea>
-			<input type="submit" value="Envoyer">
-		</form>
-	</section>
-</main>
-
-<footer>
-	<nav>
-		<ul>
-			<li>Mentions Légales</li>
-		</ul>
-	</nav>
-</footer>
-<script type="text/javascript" src="./assets/js/gestion.js"></script>
-<script type="text/javascript" src="./assets/js/connexion.js"></script>
-<script type="text/javascript" src="./assets/js/modal.js"></script>
+	<footer>
+		<nav>
+			<ul>
+				<li>Mentions Légales</li>
+			</ul>
+		</nav>
+	</footer>
+	<script type="text/javascript" src="./assets/js/gestion.js"></script>
+	<script type="text/javascript" src="./assets/js/connexion.js"></script>
+	<script type="text/javascript" src="./assets/js/modal.js"></script>
 </body>
 </html>

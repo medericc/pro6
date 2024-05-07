@@ -21,7 +21,7 @@ modifier.addEventListener('click', function () {
 
 function openModal(e) {
     e.preventDefault();
-    document.body.classList.add("modal-open");
+    
     // modall
     const target = document.querySelector(e.target.getAttribute('href'));
    
@@ -70,7 +70,7 @@ Array.from(closeButton).forEach(element => {
 });
 
 function closeModal() {
-    document.body.classList.remove("modal-open");
+   
     aside.classList.add("dnone");
     modalAjout.classList.add("dnone");
     // if (modal === null) return;

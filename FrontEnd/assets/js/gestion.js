@@ -23,14 +23,15 @@ async function fetchCategories() {
 }
 
 async function updateGallery(filter = 'all') {
-  console.log(filter)
+ 
+  console.log(filter);
   try {
     const projets = await fetchProjets();
     const categories = await fetchCategories();
 
     const galerie = document.getElementById('gallery');
     galerie.innerHTML = '';
-console.log(projets)
+
     if (projets && projets.length > 0) {
       const filteredProjets = projets.filter(projet => {
         if (filter === 'all') {
@@ -70,6 +71,10 @@ console.log(projets)
 
       tousLesTravauxOption.addEventListener('click', () => {
         updateGallery('all');
+        document.querySelectorAll('.button').forEach(btn => {
+          btn.classList.add('active');
+        });
+        tousLesTravauxOption.classList.remove('active');
       });
 
       categories.forEach(categorie => {
@@ -81,6 +86,10 @@ console.log(projets)
 
         option.addEventListener('click', () => {
           updateGallery(option.dataset.filter);
+          document.querySelectorAll('.button').forEach(btn => {
+            btn.classList.add('active');
+          });
+        //  option.classList.remove('active');
         });
       });
     } else {
@@ -92,6 +101,7 @@ console.log(projets)
     console.error('Erreur lors de la mise à jour de la galerie:', error);
   }
 }
+
 
 
 const filterButtons = document.querySelectorAll('.button');
