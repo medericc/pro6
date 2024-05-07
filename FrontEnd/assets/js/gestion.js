@@ -24,7 +24,7 @@ async function fetchCategories() {
 
 async function updateGallery(filter = 'all') {
  
-  console.log(filter);
+  
   try {
     const projets = await fetchProjets();
     const categories = await fetchCategories();
@@ -63,19 +63,22 @@ async function updateGallery(filter = 'all') {
     menu.innerHTML = '';
 
     if (categories && Array.isArray(categories) && categories.length > 0) {
+    
       const tousLesTravauxOption = document.createElement('button');
       tousLesTravauxOption.classList.add('button');
       tousLesTravauxOption.dataset.filter = 'all';
       tousLesTravauxOption.textContent = 'Tous';
+      tousLesTravauxOption.classList.add('active')
       menu.appendChild(tousLesTravauxOption);
 
       tousLesTravauxOption.addEventListener('click', () => {
         updateGallery('all');
         document.querySelectorAll('.button').forEach(btn => {
-          btn.classList.add('active');
-        });
-        tousLesTravauxOption.classList.remove('active');
+          btn.classList.remove('active');
       });
+      tousLesTravauxOption.classList.add('active');
+  });
+      
 
       categories.forEach(categorie => {
         const option = document.createElement('button');
@@ -87,16 +90,18 @@ async function updateGallery(filter = 'all') {
         option.addEventListener('click', () => {
           updateGallery(option.dataset.filter);
           document.querySelectorAll('.button').forEach(btn => {
-            btn.classList.add('active');
+            btn.classList.remove('active');
           });
-        //  option.classList.remove('active');
+          option.classList.add('active');
         });
+        
       });
     } else {
       console.warn('Aucune catégorie trouvée.');
     }
 
     enableBlackBar();
+   
   } catch (error) {
     console.error('Erreur lors de la mise à jour de la galerie:', error);
   }
