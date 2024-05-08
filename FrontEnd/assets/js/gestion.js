@@ -111,10 +111,16 @@ async function updateGallery(filter = 'all') {
 
 const filterButtons = document.querySelectorAll('.button');
 filterButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    updateGallery(button.dataset.filter);
-  });
+    button.addEventListener('click', () => {
+        updateGallery(button.dataset.filter);
+        
+        filterButtons.forEach(btn => {
+            btn.classList.remove('active');
+        });
+        button.classList.add('active');
+    });
 });
+
 
 async function enableBlackBar() {
   try {
