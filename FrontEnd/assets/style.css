@@ -644,6 +644,9 @@ input[type="submit"].bac.enabled {
     margin-top: 10px;
 }
 
+.field #output {
+    display: none;
+}
 .field.visible #output {
     display: block;
 }
