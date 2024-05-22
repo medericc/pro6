@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const closeButton = document.querySelectorAll('.close');
     const ferme = document.getElementById('ferme');
     let modalShouldClose = true;
-    modalGal();
 
     // Fermer la modale
     ferme.addEventListener('click', closeModal);
@@ -14,6 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const fileInput = document.getElementById('pictureProjet');
     const titleInput = document.getElementById('titrePhoto');
     const categoryInput = document.getElementById('categoriePhoto');
+    const output = document.getElementById('output');
+    const field = document.querySelector('.field');
 
     function checkFormCompletion() {
         if (fileInput.files.length > 0 && titleInput.value.trim() !== "" && categoryInput.value.trim() !== "") {
@@ -25,11 +26,24 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    fileInput.addEventListener('change', checkFormCompletion);
-    titleInput.addEventListener('input', checkFormCompletion);
+    fileInput.addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            output.src = URL.createObjectURL(file);
+            output.onload = function() {
+                URL.revokeObjectURL(output.src);
+            }
+            field.classList.add('visible');
+        } else {
+            field.classList.remove('visible');
+        }
+        checkFormCompletion();
+    });
+
+    titleInput.addEventListener('change', checkFormCompletion);
     categoryInput.addEventListener('change', checkFormCompletion);
 
-    // Montrer le bouton
+   
     const modifier = document.getElementById('modifierProjetLink');
     modifier.addEventListener('click', () => {
         aside.classList.remove("dnone");
@@ -72,6 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const response = await fetch('http://localhost:5678/api/works');
             const data = await response.json();
             await populateModalWithData(data);
+            await populateMainGallery(data);  
             return data;
         } catch (error) {
             console.error('Erreur de récupération des données des travaux:', error);
@@ -124,27 +139,50 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    async function populateMainGallery(data) {
+        const galerie = document.getElementById('gallery');
+        galerie.innerHTML = '';
+        for (let i = 0; i < data.length; i++) {
+            const figure = document.createElement('figure');
+            figure.id = 'figure' + data[i].id;
+            const image = document.createElement('img');
+            image.src = data[i].imageUrl;
+            image.alt = data[i].title;
+            figure.appendChild(image);
+            const figcaption = document.createElement('figcaption');
+            figcaption.textContent = data[i].title;
+            figure.appendChild(figcaption);
+            galerie.appendChild(figure);
+        }
+    }
+
     async function modalAjoutPhoto() {
         aside.classList.add("dnone");
         modalAjout.classList.remove("dnone");
-
+    
         const formAjoutPhoto = document.getElementById('formAjoutPhoto');
         const backButton = modalAjout.querySelector('#retourGalerie');
-
+        const submitButton = document.getElementById('butAdd');
+        const fileInput = document.getElementById('pictureProjet');
+        const titleInput = document.getElementById('titrePhoto');
+        const categoryInput = document.getElementById('categoriePhoto');
+        const output = document.getElementById('output');
+        const field = document.querySelector('.field');
+    
         backButton.addEventListener('click', function(event) {
             event.preventDefault();
             aside.classList.remove("dnone");
             modalAjout.classList.add("dnone");
         });
-
+    
         formAjoutPhoto.addEventListener('submit', async function(event) {
             event.preventDefault();
-            document.querySelector('#butAdd').disabled = true;
+            submitButton.disabled = true;
             const formData = new FormData();
-            const titrePhoto = document.getElementById('titrePhoto').value;
-            const catPhoto = document.getElementById('categoriePhoto').value;
-            const imgPhoto = document.getElementById('pictureProjet').files;
-            formData.append('image', imgPhoto[0]);
+            const titrePhoto = titleInput.value;
+            const catPhoto = categoryInput.value;
+            const imgPhoto = fileInput.files[0];
+            formData.append('image', imgPhoto);
             formData.append('title', titrePhoto);
             formData.append('category', catPhoto);
             try {
@@ -159,26 +197,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (!response.ok) {
                     throw new Error("Échec de l'ajout de la photo.");
                 }
-                if (response.ok) {
-                    const data = await response.json();
-                    const galerie = document.getElementById('gallery');
-                    const figure = document.createElement('figure');
-                    const image = document.createElement('img');
-                    image.src = 'http://localhost:5678/images/' + imgPhoto[0].name;
-                    image.alt = data.title;
-                    figure.appendChild(image);
-                    const figcaption = document.createElement('figcaption');
-                    figcaption.textContent = data.title;
-                    figure.appendChild(figcaption);
-                    galerie.appendChild(figure);
-                    this.reset();
-                    document.getElementById('titrePhoto').value = '';
-                    output.src = '#'; //empty
-                    await updateGallery();
-                    await modalGal();
-                    aside.classList.remove("dnone");
-                    modalAjout.classList.add("dnone");
-                }
+                const data = await response.json();
+                await modalGal(); 
+    
+               
+                formAjoutPhoto.reset();
+                output.src = '#';
+                field.classList.remove('visible');
+                checkFormCompletion();
+    
+                aside.classList.remove("dnone");
+                modalAjout.classList.add("dnone");
             } catch (error) {
                 console.error("Erreur lors de l'ajout de la photo :", error);
             }
@@ -198,4 +227,6 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     fileInput.addEventListener('change', loadFile);
+
+    modalGal(); 
 });

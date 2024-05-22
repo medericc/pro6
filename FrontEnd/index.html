@@ -14,6 +14,7 @@
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<link rel="stylesheet" href="./assets/style.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+	<script src="https://kit.fontawesome.com/73db696eb9.js" crossorigin="anonymous"></script>
 
 </head>
 
@@ -57,8 +58,15 @@
 				<form id="formAjoutPhoto">
 					<div class="formCol" >
 					
-						<input type="file" id="pictureProjet" name="image" accept="image/*" required>
-						<img id="output" src="#" alt="Aperçu de l'image" style="max-width: 100%; max-height: 300px;">
+						
+						<div class="field">
+							<i class="fa-regular fa-image" style="color: #b9c5cc;"></i>
+							<label for="pictureProjet" class="file">+ Ajouter une photo</label>
+							<input type="file" id="pictureProjet" name="image" accept="image/*" required style="display: none;">
+							<img id="output" src="#" alt="Aperçu de l'image" style="max-width: 100%; max-height: 300px; display: none;">
+							<label for="texte">jpg, png : 4 mo max</label>
+						</div>
+						
 						
 						<label class="titrec" for="titrePhoto">Titre</label>  
 						<input class="rect"  type="text" id="titrePhoto" name="titrePhoto" required>
