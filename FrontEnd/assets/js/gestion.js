@@ -1,9 +1,7 @@
 async function fetchProjets() {
   try {
     const response = await fetch('http://localhost:5678/api/works');
-    const data = await response.json();
-
-    return data;
+    return await response.json();
   } catch (error) {
     console.error('Erreur de récupération des données des travaux:', error);
     throw error; 
@@ -13,21 +11,57 @@ async function fetchProjets() {
 async function fetchCategories() {
   try {
     const categoriesResponse = await fetch('http://localhost:5678/api/categories');
-    const categoriesData = await categoriesResponse.json();
-
-    return categoriesData;
+    return await categoriesResponse.json();
   } catch (error) {
     console.error('Erreur de récupération des catégories:', error);
     throw error;
   }
 }
 
+const start = async () => {
+  const categories = await fetchCategories();
+  const menu = document.querySelector('.centre');
+  menu.innerHTML = '';
+
+  if (categories && Array.isArray(categories) && categories.length > 0) {
+    // create filter ALL
+    const tousLesTravauxOption = document.createElement('button');
+    tousLesTravauxOption.classList.add('button');
+    tousLesTravauxOption.dataset.filter = 'all';
+    tousLesTravauxOption.textContent = 'Tous';
+    tousLesTravauxOption.classList.add('active');
+    menu.appendChild(tousLesTravauxOption);
+
+    // create filter categories
+    categories.forEach(categorie => {
+      const option = document.createElement('button');
+      option.classList.add('button');
+      option.dataset.filter = categorie.id;
+      option.textContent = categorie.name;
+      menu.appendChild(option);
+
+      option.addEventListener('click', () => {
+        updateGallery(option.dataset.filter);
+        document.querySelectorAll('.button').forEach(btn => {
+          btn.classList.toggle('active', btn.dataset.filter === option.dataset.filter);
+        });
+      });
+    });
+
+    // apply style initiall on filter ALL
+    tousLesTravauxOption.addEventListener('click', () => {
+      updateGallery('all');
+      document.querySelectorAll('.button').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.filter === 'all');
+      });
+    });
+  }
+};
+
+
 async function updateGallery(filter = 'all') {
- 
-  
   try {
     const projets = await fetchProjets();
-    const categories = await fetchCategories();
 
     const galerie = document.getElementById('gallery');
     galerie.innerHTML = '';
@@ -59,68 +93,11 @@ async function updateGallery(filter = 'all') {
       console.warn('Aucun projet trouvé.');
     }
 
-    const menu = document.querySelector('.centre');
-    menu.innerHTML = '';
-
-    if (categories && Array.isArray(categories) && categories.length > 0) {
-    
-      const tousLesTravauxOption = document.createElement('button');
-      tousLesTravauxOption.classList.add('button');
-      tousLesTravauxOption.dataset.filter = 'all';
-      tousLesTravauxOption.textContent = 'Tous';
-      tousLesTravauxOption.classList.add('active')
-      menu.appendChild(tousLesTravauxOption);
-
-      tousLesTravauxOption.addEventListener('click', () => {
-        updateGallery('all');
-        document.querySelectorAll('.button').forEach(btn => {
-          btn.classList.remove('active');
-      });
-      tousLesTravauxOption.classList.add('active');
-  });
-      
-
-      categories.forEach(categorie => {
-        const option = document.createElement('button');
-        option.classList.add('button');
-        option.dataset.filter = categorie.id;
-        option.textContent = categorie.name;
-        menu.appendChild(option);
-
-        option.addEventListener('click', () => {
-          updateGallery(option.dataset.filter);
-          document.querySelectorAll('.button').forEach(btn => {
-            btn.classList.remove('active');
-          });
-          option.classList.add('active');
-        });
-        
-      });
-    } else {
-      console.warn('Aucune catégorie trouvée.');
-    }
-
     enableBlackBar();
-   
   } catch (error) {
     console.error('Erreur lors de la mise à jour de la galerie:', error);
   }
 }
-
-
-
-const filterButtons = document.querySelectorAll('.button');
-filterButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        updateGallery(button.dataset.filter);
-        
-        filterButtons.forEach(btn => {
-            btn.classList.remove('active');
-        });
-        button.classList.add('active');
-    });
-});
-
 
 async function enableBlackBar() {
   try {
@@ -145,7 +122,6 @@ async function enableBlackBar() {
       blackBar.innerHTML = '<p><i class="fa-regular fa-pen-to-square"></i>Mode Édition </p>';
       document.body.insertBefore(blackBar, document.body.firstChild);
 
-      
       if (filterButtons && filterButtons.length > 0) {
         filterButtons.forEach(button => {
           button.style.display = 'none';
@@ -165,8 +141,6 @@ async function enableBlackBar() {
   }
 }
 
-
-
 function logout() {
   sessionStorage.removeItem('token');
   window.location.reload(); 
@@ -180,3 +154,5 @@ document.addEventListener("DOMContentLoaded", async function () {
     console.error('Erreur lors de l\'initialisation de la galerie ou de la barre noire:', error);
   }
 });
+
+start();
