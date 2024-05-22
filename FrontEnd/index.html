@@ -47,7 +47,7 @@
 		</div>
 
 		<div id="modalAjoutPhoto" class="modal dnone" aria-hidden="true" role="dialog">
-			<div class="modal-wrapper">
+			<div class="modal-wrapper2">
 				<a href="#" class="back" id="retourGalerie">
 					<i class="fa-solid fa-arrow-left fa-xl"></i> 
 				</a>
@@ -60,15 +60,15 @@
 					
 						
 						<div class="field">
-							<i class="fa-regular fa-image" style="color: #b9c5cc;"></i>
+							<i class="fa-regular fa-image fa-5x" style="color: #b9c5cc; width: 76px; height: 76px;"></i>
 							<label for="pictureProjet" class="file">+ Ajouter une photo</label>
 							<input type="file" id="pictureProjet" name="image" accept="image/*" required style="display: none;">
 							<img id="output" src="#" alt="Aperçu de l'image" style="max-width: 100%; max-height: 300px; ">
-							<label for="texte">jpg, png : 4 mo max</label>
+							<label for="texte" style="height: 12px;">jpg, png : 4 mo max</label>
 						</div>
 						
 						
-						<label class="titrec" for="titrePhoto">Titre</label>  
+						<label class="titrec2" for="titrePhoto">Titre</label>  
 						<input class="rect"  type="text" id="titrePhoto" name="titrePhoto" required>
 						
 						<label class="titrec" for="categoriePhoto">Catégorie</label>
@@ -78,7 +78,7 @@
 							<option value="3">Hôtels & restaurants</option>
 						</select>
 					</div>
-					<hr id="hr2">
+					
 					<input class="bac" id="butAdd" type="submit" value="Valider" disabled>
 
 				</form>
